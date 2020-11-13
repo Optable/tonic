@@ -19,6 +19,22 @@ impl Certificate {
         let pem = pem.as_ref().into();
         Self { pem }
     }
+
+    /// expose certificate pem from tonic 0.3.1
+    /// Get a immutable reference to underlying certificate
+    pub fn get_ref(&self) -> &[u8] {
+        &self.pem.as_slice()
+    }
+
+    /// Get a mutable reference to underlying certificate
+    pub fn get_mut(&mut self) -> &mut [u8] {
+        self.pem.as_mut()
+    }
+
+    /// Consumes `self`, returning the underlying certificate
+    pub fn into_inner(self) -> Vec<u8> {
+        self.pem
+    }
 }
 
 impl Identity {
